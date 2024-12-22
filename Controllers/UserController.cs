@@ -1,4 +1,5 @@
-﻿using CSharpClicker.Web.UseCases.GetLeaderboard;
+﻿using CSharpClicker.Web.UseCases.CheckAchievements;
+using CSharpClicker.Web.UseCases.GetLeaderboard;
 using CSharpClicker.Web.UseCases.GetUserSettings;
 using CSharpClicker.Web.UseCases.SetUserAvatar;
 using MediatR;
@@ -39,5 +40,12 @@ public class UserController : Controller
         var userSettings = await mediator.Send(new GetCurrentUserSettingsQuery());
 
         return View(userSettings);
+    }
+
+    [HttpGet("achievements")]
+    public async Task<IActionResult> Achievements()
+    {
+        var userAchievements = await mediator.Send(new CheckAchievementsCommand());
+        return View(userAchievements);
     }
 }

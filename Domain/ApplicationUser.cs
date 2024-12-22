@@ -11,4 +11,6 @@ public class ApplicationUser : IdentityUser<Guid>
     public ICollection<UserBoost> UserBoosts { get; set; } = [];
 
     public byte[] Avatar { get; set; } = [];
+
+    public ICollection<UserAchievement> UserAchievements { get; set; } = new List<UserAchievement>();
 }

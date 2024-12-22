@@ -1,0 +1,36 @@
+﻿@model CSharpClicker.Web.ViewModels.AchievementsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div>
+    <h3>Достижения</h3>
+    <div class="achievements-list">
+        @foreach (var achievement in Model.Achievements)
+        {
+            var isCompleted = Model.UserAchievements.Any(ua => ua.AchievementId == achievement.Id);
+
+            if (isCompleted)
+            {
+                <div class="achievement-completed">
+                    <h4>@achievement.Title</h4>
+                    <p>@achievement.Description</p>
+                    <p>Достижение выполнено!</p>
+                </div>
+            }
+            else
+            {
+                <div class="achievement-not-completed">
+                    <h4>@achievement.Title</h4>
+                    <p>@achievement.Description</p>
+                    <p>Достижение еще не выполнено</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
