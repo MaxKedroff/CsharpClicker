@@ -4,31 +4,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles
+{
+    <link href="~/css/Achievements.css" rel="stylesheet" />
+}
 
-
-<div>
-    <h3>Достижения</h3>
+<div class="achievements-container">
+    <h3 class="achievements-title">Достижения</h3>
     <div class="achievements-list">
         @foreach (var achievement in Model.Achievements)
         {
             var isCompleted = Model.UserAchievements.Any(ua => ua.AchievementId == achievement.Id);
 
-            if (isCompleted)
-            {
-                <div class="achievement-completed">
-                    <h4>@achievement.Title</h4>
-                    <p>@achievement.Description</p>
-                    <p>Достижение выполнено!</p>
+            <div class="achievement-card @(isCompleted ? "completed" : "not-completed")">
+                <div class="achievement-header">
+                    <h4 class="achievement-title">@achievement.Title</h4>
                 </div>
-            }
-            else
-            {
-                <div class="achievement-not-completed">
-                    <h4>@achievement.Title</h4>
-                    <p>@achievement.Description</p>
-                    <p>Достижение еще не выполнено</p>
+                <div class="achievement-body">
+                    <p class="achievement-description">@achievement.Description</p>
                 </div>
-            }
+                <div class="achievement-status">
+                    <p>@(isCompleted ? "Достижение выполнено!" : "Достижение еще не выполнено")</p>
+                </div>
+            </div>
         }
     </div>
 </div>
